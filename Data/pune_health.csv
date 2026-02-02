@@ -1,0 +1,56 @@
+﻿_id,SR.NO,DEPARTMENT NAME,SUBJECT,JANUARY,FEBRUARY,MARCH,April,MAY,JUNE,JULY,August,SEPTEMBER,OCTOBER,NOVEMBER,DECEMBER,PROGRESSIVE CURRENT YEAR (2017)
+1,1,Insect Control  ,Dengue,19,16,28,23,28,58,228,786,1114,1819,1796,475,6390
+2,"","",No. of Visit of Dengue Positive,16,19,28,23,28,58,228,786,1114,1819,1796,475,6390
+3,"","",No. of Dengue Death,0,0,0,0,0,0,0,0,0,0,0,0,0
+4,"","",Centinal Centre Positive,9,1,4,5,3,6,58,234,251,526,448,146,1691
+5,"","",Total No. of Notice Given,0,444,426,426,229,1269,3102,991,728,1263,463,269,9610
+6,"","",Total No. of Defaulters,0,0,0,0,0,0,0,0,0,0,0,0,0
+7,"","",Total Amount of Fine in Rs.,0,0,0,0,0,0,0,0,0,0,0,0,0
+8,"","",Chikunguinia,36,17,17,11,4,7,28,128,140,262,217,84,951
+9,"","",No. of Visit of Chikunguinia Positive,36,15,19,11,4,7,28,128,140,262,217,84,951
+10,"","",No. of Chikunguinia Death,0,0,0,0,0,0,0,0,0,0,0,0,0
+11,"","",Suspected Positive,36,17,17,11,4,7,28,128,140,262,217,84,951
+12,"","",Malaria,0,0,1,0,0,0,4,2,0,0,0,0,7
+13,"","",No. of Visit of Malaria Positive,0,1,0,0,0,0,4,2,0,0,0,0,7
+14,"","",No. of Malaria Death,0,0,0,0,0,0,0,0,0,0,0,0,0
+15,"","",Suspected Positive,0,1,0,0,0,0,4,2,0,0,0,0,7
+16,2,Epidemic Disease (National Health Program (NHP)),Swine Flu,5,25,121,98,38,26,62,161,115,43,8,1,703
+17,"","",Swine Flu (DEATHS),2,2,22,17,12,4,21,27,27,17,6,0,157
+18,"","",Pig Control,0,0,0,0,0,0,0,0,0,0,0,0,0
+19,3,Food and Liciences,PCPNDT (Visits),182,113,181,178,181,138,179,154,124,174,161,153,1918
+20,"","",F Form (Checked during Visit),34395,33578,36715,35051,36715,35029,36978,35256,36300,34971,34890,34063,423941
+21,"","",Female F Form Found (Lady already having 1 or 2 female child),7346,7030,8186,7063,8030,7488,7908,7295,7708,7231,7379,7105,89769
+22,"","",Action Taken - Court Case,0,0,0,0,0,0,0,0,0,0,0,0,0
+23,"","",Action Taken - Surrender,0,0,0,0,0,0,0,0,0,0,0,0,0
+24,"","",Action Taken - F Form Notice,0,0,0,0,0,0,0,0,0,0,0,0,0
+25,"",Non-Renewal NURSING HOME,Action Taken - Notice Given for NON-RENEWAL,0,0,0,0,0,0,0,0,0,0,0,0,0
+26,"",UNREGISTERED NURSING HOME,Action Taken - Notice Given,0,0,0,0,0,0,0,0,0,0,0,0,0
+27,"","",Action Taken - Court Case,0,0,0,0,0,0,0,0,0,0,0,0,0
+28,4,Family Planning Control (National Health Program (NHP)),MTP (visits),31,61,83,83,27,40,33,24,0,0,0,0,382
+29,"","",Female Sterilization,674,691,1710,908,1346,708,872,705,527,635,703,869,10348
+30,"","",Male Sterilization (NSV),18,9,15,8,16,23,20,7,8,10,4,8,146
+31,"","",CUT (IUD),464,409,1910,376,378,321,312,365,294,795,354,422,6400
+32,5,RCH (National Health Program (NHP)),JSY (Beneficiaries),73,222,324,24,136,123,248,82,116,61,58,197,1664
+33,"","",Compensation for Sterilization (Beneficiaries),371,167,284,87,105,327,174,49,51,47,210,102,1974
+34,"",DOG SQUAD (National Health Program (NHP)),Dog - Bites,942,996,1006,866,612,608,607,721,873,1145,1011,953,10340
+35,"","",Dog - Caught & Sterilized,835,546,3001,0,0,0,0,1083,1861,1939,965,0,10230
+36,"","",Rabies Case Found,3,0,0,0,4,1,0,1,0,0,3,0,12
+37,"","",Rabies Death (PMC),1,0,0,0,0,0,0,0,0,0,0,0,1
+38,"","",Rabies Death (OPMC),1,0,0,0,4,1,0,1,0,0,2,0,9
+39,7,Birth & Death Dept.,Births - Male,2282,2182,2441,2243,2283,2110,2351,2446,2681,2729,2638,1992,28378
+40,"","",Births - Female,2106,1866,2182,2085,2119,1997,2077,2451,2452,2635,2449,1872,26291
+41,"","",Births - Total,4388,4048,4623,4328,4402,4107,4428,4897,5133,5364,5087,3864,54669
+42,"","",Birth Female Ratio,923,855,894,930,928,946,883,1002,915,966,928,940,926
+43,"","",Deaths - Male,1610,1308,1479,1402,1304,1304,635,1150,1550,1630,1574,1461,16407
+44,"","",Deaths - Female,1163,896,1073,1006,1006,856,474,897,1055,1178,1081,995,11680
+45,"","",Deaths - Total,2773,2204,2552,2408,2310,2160,1109,2047,2605,2808,2655,2456,28087
+46,"","",Infant Mortality - Male,127,79,101,142,94,88,27,79,108,135,99,72,1151
+47,"","",Infant Mortality - Female,85,75,88,106,55,83,26,96,62,75,84,54,889
+48,"","",Infant Mortality - Total,212,154,189,248,149,171,53,175,170,210,183,126,2040
+49,Total,"","",,,,,,,,,,,,,
+50,NOTE : Week Starting Every Sunday to Saturday,"","",,,,,,,,,,,,,
+51,NOTE : Figures for RCH is till the Month Feb. 2016 (Jan - Dec 2016),"","",,,,,,,,,,,,,
+52,NOTE : Figures for SWINE FLU are from (January to December 2016),"","",,,,,,,,,,,,,
+53,NOTE : Birth & Death figures till March. 2016 (Progressive),"","",,,,,,,,,,,,,
+54,NOTE : NHP (Dog) is for the Month April. 2016 (Jan. to Dec.2016),"","",,,,,,,,,,,,,
+55,NOTE : MTP Figures is for the month March. 2016 (Progressive) (Jan. to Dec.),"","",,,,,,,,,,,,,
