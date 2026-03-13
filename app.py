@@ -29,3 +29,12 @@ with tab1:
             "Predicted Cases": [152, 128, 111, 102, 95]
         })
         st.dataframe(cluster_df, hide_index=True, use_container_width=True)
+
+        st.divider()
+        st.subheader("CURRENT CONDITIONS (PATNA)")
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Temperature", "29.1 °C")
+        c2.metric("Humidity", "74 %")
+        c3.metric("Rainfall (24h)", "12.4 mm")
+        
+        st.error("AI Prediction (14-Day): **HIGH RISK**\n\nRecommended Action: Deploy Drone Squadrons")
