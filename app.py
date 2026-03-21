@@ -36,3 +36,17 @@ with tab1:
         c2.metric("Humidity", "74 %")
         c3.metric("Rainfall (24h)", "12.4 mm")
         st.error("AI Prediction (14-Day): **HIGH RISK**\n\nRecommended Action: Deploy Drone Squadrons")
+
+with tab2:
+    st.subheader("DRONE SWARM OPERATIONS")
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Mission Status", "IN PROGRESS")
+    c2.metric("Active Drones", "12 / 12")
+    c3.metric("Squadrons", "3")
+    c4.metric("Coverage", "68.4 %")
+    
+    col_map2, col_chart2 = st.columns(2)
+    with col_map2:
+        st.write("Live Tracking Map Placeholder")
+    with col_chart2:
+        st.write("Convergence Chart Placeholder")
