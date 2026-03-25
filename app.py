@@ -2,10 +2,13 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import time
 import pydeck as pdk
 import plotly.express as px
+import plotly.graph_objects as go
 from src.data import load_data
 from src.model import get_model
+from src.swarm import SwarmSimulator
 from src.ui_components import inject_custom_css
 
 st.set_page_config(page_title="Vecto Shield", layout="wide", initial_sidebar_state="collapsed")
@@ -45,8 +48,29 @@ with tab2:
     c3.metric("Squadrons", "3")
     c4.metric("Coverage", "68.4 %")
     
+    deploy_btn = st.button("Launch Simulated Mission")
+    
     col_map2, col_chart2 = st.columns(2)
     with col_map2:
-        st.write("Live Tracking Map Placeholder")
+        map_ph = st.empty()
     with col_chart2:
-        st.write("Convergence Chart Placeholder")
+        chart_ph = st.empty()
+        
+    if deploy_btn:
+        simulator = SwarmSimulator(targets, patna_center)
+        frames, dists = simulator.simulate()
+        
+        target_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame(targets, columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[255, 0, 0, 200]', get_radius=300)
+        base_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame([patna_center], columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 100, 255, 255]', get_radius=500)
+        
+        for i, frame in enumerate(frames):
+            drone_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame(frame, columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 255, 0, 255]', get_radius=150)
+            with map_ph:
+                st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=30), layers=[target_layer, base_layer, drone_layer]))
+            
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(x=list(range(i+1)), y=dists[:i+1], mode='lines', name='Avg Distance', line=dict(color='#10b981', width=3)))
+            fig.update_layout(title="Average Distance to Target vs Time", paper_bgcolor='#0f172a', plot_bgcolor='#1e293b', font=dict(color='white'), margin=dict(l=0, r=0, t=30, b=0))
+            with chart_ph:
+                st.plotly_chart(fig, use_container_width=True)
+            time.sleep(0.05)
