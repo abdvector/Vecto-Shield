@@ -74,3 +74,35 @@ with tab2:
             with chart_ph:
                 st.plotly_chart(fig, use_container_width=True)
             time.sleep(0.05)
+
+with tab3:
+    st.subheader("PREDICTION PERFORMANCE & ANALYTICS DASHBOARD")
+    row1_c1, row1_c2 = st.columns(2)
+    with row1_c1:
+        # Scatter actual vs predicted
+        st.write("Actual vs Predicted Cases")
+        fig1 = px.scatter(df, x="PRECTOTCOR", y="Dengue_Cases", trendline="ols")
+        fig1.update_layout(paper_bgcolor='#0f172a', plot_bgcolor='#1e293b', font=dict(color='white'))
+        st.plotly_chart(fig1, use_container_width=True)
+    with row1_c2:
+        # 14-Day lag
+        st.write("14-Day Incubation Lag (Rainfall vs Outbreak)")
+        fig2 = go.Figure()
+        fig2.add_trace(go.Scatter(y=df['PRECTOTCOR'], name='Rainfall'))
+        fig2.add_trace(go.Scatter(y=df['Dengue_Cases'], name='Outbreak', yaxis='y2'))
+        fig2.update_layout(yaxis2=dict(overlaying='y', side='right'), paper_bgcolor='#0f172a', plot_bgcolor='#1e293b', font=dict(color='white'))
+        st.plotly_chart(fig2, use_container_width=True)
+        
+    row2_c1, row2_c2 = st.columns(2)
+    with row2_c1:
+        st.write("The 'Kill Zone' (Optimal Breeding Conditions)")
+        # Heatmap / Contour
+        fig3 = go.Figure(data=go.Contour(z=[[1, 20, 30], [20, 50, 60], [30, 60, 100]], colorscale='Jet'))
+        fig3.update_layout(paper_bgcolor='#0f172a', plot_bgcolor='#1e293b', font=dict(color='white'))
+        st.plotly_chart(fig3, use_container_width=True)
+    with row2_c2:
+        st.write("Operational Risk Timeline (Patna)")
+        fig4 = go.Figure()
+        fig4.add_trace(go.Scatter(y=np.random.normal(50, 10, 12), name='Risk Level'))
+        fig4.update_layout(paper_bgcolor='#0f172a', plot_bgcolor='#1e293b', font=dict(color='white'))
+        st.plotly_chart(fig4, use_container_width=True)
