@@ -46,7 +46,7 @@ with tab2:
     c1.metric("Mission Status", "IN PROGRESS")
     c2.metric("Active Drones", "12 / 12")
     c3.metric("Squadrons", "3")
-    c4.metric("Coverage", "68.4 %")
+    c4.metric("Coverage", "68.4 %", delta="Optimal", delta_color="normal")
     
     deploy_btn = st.button("Launch Simulated Mission")
     
