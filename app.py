@@ -97,7 +97,7 @@ with tab3:
     with row2_c1:
         st.write("The 'Kill Zone' (Optimal Breeding Conditions)")
         # Heatmap / Contour
-        fig3 = go.Figure(data=go.Contour(z=[[1, 20, 30], [20, 50, 60], [30, 60, 100]], colorscale='Jet'))
+        fig3 = go.Figure(data=go.Contour(z=[[1, 20, 30], [20, 50, 60], [30, 60, 100]], colorscale='RdYlGn_r'))
         fig3.update_layout(paper_bgcolor='#0f172a', plot_bgcolor='#1e293b', font=dict(color='white'))
         st.plotly_chart(fig3, use_container_width=True)
     with row2_c2:
