@@ -48,7 +48,7 @@ with tab2:
     c3.metric("Squadrons", "3")
     c4.metric("Coverage", "68.4 %", delta="Optimal", delta_color="normal")
     
-    deploy_btn = st.button("Launch Simulated Mission")
+    deploy_btn = st.button("Stop Mission")
     
     col_map2, col_chart2 = st.columns(2)
     with col_map2:
