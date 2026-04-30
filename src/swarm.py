@@ -12,7 +12,7 @@ class SwarmSimulator:
         assigned_targets = np.array([self.targets[i % len(self.targets)] for i in range(NUM_DRONES)])
         for _ in range(steps):
             r1, r2 = np.random.rand(NUM_DRONES, 2), np.random.rand(NUM_DRONES, 2)
-            self.vel = (0.5 * self.vel) + (1.2 * r1 * (pbest - self.pos)) + (1.2 * r2 * (assigned_targets - self.pos))
+            self.vel = (0.6 * self.vel) + (1.2 * r1 * (pbest - self.pos)) + (1.2 * r2 * (assigned_targets - self.pos))
             self.pos += self.vel * 0.08
             dist = np.linalg.norm(self.pos - assigned_targets, axis=1)
             improved = dist < pbest_val
