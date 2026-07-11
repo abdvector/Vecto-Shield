@@ -34,7 +34,7 @@ with tab1:
         target_df = pd.DataFrame(targets, columns=['lon', 'lat'])
         target_df['weight'] = [0.92, 0.87, 0.81, 0.76]
         heatmap = pdk.Layer("HeatmapLayer", data=target_df, get_position="[lon, lat]", get_weight="weight", radiusPixels=80, intensity=1, colorRange=[[0,255,0],[255,255,0],[255,0,0]])
-        st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=0), layers=[heatmap]))
+        st.pydeck_chart(pdk.Deck(map_style='https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=0), layers=[heatmap]))
     with col_side:
         st.subheader("TOP 5 HIGH RISK CLUSTERS")
         cluster_df = pd.DataFrame({"Rank": [1, 2, 3, 4], "Cluster": ["Kankarbagh", "Rajendra Nagar", "Kumhrar", "Patliputra"], "Risk Score": ["0.92 (Critical)", "0.87 (High)", "0.81 (High)", "0.76 (High)"], "Predicted Cases": [152, 128, 111, 102]})
@@ -96,7 +96,7 @@ with tab2:
                 get_radius=250
             )
             with map_ph:
-                st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=30), layers=[target_layer, base_layer, drone_layer]))
+                st.pydeck_chart(pdk.Deck(map_style='https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=30), layers=[target_layer, base_layer, drone_layer]))
             
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=list(range(i+1)), y=dists[:i+1], mode='lines', name='Avg Distance (Degrees)', line=dict(color='#10b981', width=3)))
