@@ -88,15 +88,12 @@ with tab2:
         base_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame([drone_base], columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 100, 255, 255]', get_radius=500)
         
         for i, frame in enumerate(frames):
-            drone_df = pd.DataFrame(frame, columns=['lon', 'lat'])
-            drone_df['icon'] = '✈️'
             drone_layer = pdk.Layer(
-                "TextLayer",
-                data=drone_df,
-                get_position="[lon, lat]",
-                get_text="icon",
-                get_size=28,
-                get_alignment_baseline="'bottom'"
+                'ScatterplotLayer', 
+                data=pd.DataFrame(frame, columns=['lon', 'lat']), 
+                get_position='[lon, lat]', 
+                get_color='[16, 185, 129, 255]', # Bright Emerald Green
+                get_radius=250
             )
             with map_ph:
                 st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=30), layers=[target_layer, base_layer, drone_layer]))
