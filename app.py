@@ -15,7 +15,7 @@ st.set_page_config(page_title="Vecto Shield", layout="wide", initial_sidebar_sta
 inject_custom_css()
 df = load_data(os.path.join("Data", "pune_weather.csv"), os.path.join("Data", "pune_health.csv"))
 model = get_model(df)
-tab1, tab2, tab3 = st.tabs(["1 HOTSPOT MAP", "2 DRONE OPERATIONS", "3 ANALYTICS DASHBOARD"])
+tab1, tab2, tab3 = st.tabs(["1 PREDICTED HOTSPOTS", "2 DRONE OPERATIONS", "3 ANALYTICS DASHBOARD"])
 
 patna_center = [85.1376, 25.5941]
 drone_base = [85.05, 25.63] # Danapur / Airport Region
@@ -79,6 +79,8 @@ with tab2:
         chart_ph = st.empty()
         
     st.info("**Real-Time Metaheuristic Analytics (PSO)**: The Particle Swarm Optimization algorithm mathematically updates velocity vectors in real-time, allowing the drone squadrons to independently search, optimize flight paths, and converge on high-risk mosquito breeding clusters with minimal fuel usage.")
+    st.latex(r"v_{i}^{t+1} = \omega v_{i}^t + c_1 r_1 (pbest_i - x_i^t) + c_2 r_2 (gbest - x_i^t)")
+    st.caption("Where **$v$** is velocity, **$\omega$** is inertia, **$pbest$** is the drone's best known position, and **$gbest$** is the target hotspot.")
         
     if start_btn:
         simulator = SwarmSimulator(targets, drone_base)
