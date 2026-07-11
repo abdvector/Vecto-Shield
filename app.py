@@ -22,6 +22,12 @@ drone_base = [85.05, 25.63] # Danapur / Airport Region
 targets = [ [85.12, 25.60], [85.15, 25.58], [85.10, 25.59], [85.14, 25.61] ]
 
 with tab1:
+    st.markdown("""
+    ### Intelligent Autonomous Vector Control
+    Welcome to the Vecto Shield operations dashboard. This enterprise-grade AI system automatically ingests meteorological data and municipal health records to predict mosquito-borne outbreaks before they occur. 
+    
+    *Note: The current Live Risk Heatmap and metrics are illustrating data scaled for **Patna City** as an example deployment. The backend is designed to instantly scale to any global municipality when fed with local datasets.*
+    """)
     col_map, col_side = st.columns([2, 1])
     with col_map:
         st.subheader("LIVE RISK HEATMAP")
@@ -40,7 +46,14 @@ with tab1:
         c2.metric("Humidity", "74 %")
         c3.metric("Rainfall (24h)", "12.4 mm")
         st.error("AI Prediction (14-Day): **HIGH RISK**\n\nRecommended Action: Deploy Drone Squadrons")
-
+        
+        st.divider()
+        st.markdown("""
+        **Dashboard Navigation:**
+        - **Tab 2 (Drone Operations):** Deploy autonomous UAV squadrons to neutralize high-risk clusters using real-time pathfinding algorithms.
+        - **Tab 3 (Analytics Dashboard):** Review deep-dive meteorological correlations, incubation lag visualizations, and historical AI prediction accuracy.
+        """)
+        
 with tab2:
     st.subheader("DRONE SWARM OPERATIONS")
     c1, c2, c3, c4 = st.columns(4)
@@ -75,7 +88,16 @@ with tab2:
         base_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame([drone_base], columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 100, 255, 255]', get_radius=500)
         
         for i, frame in enumerate(frames):
-            drone_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame(frame, columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 255, 0, 255]', get_radius=150)
+            drone_df = pd.DataFrame(frame, columns=['lon', 'lat'])
+            drone_df['icon'] = '✈️'
+            drone_layer = pdk.Layer(
+                "TextLayer",
+                data=drone_df,
+                get_position="[lon, lat]",
+                get_text="icon",
+                get_size=28,
+                get_alignment_baseline="'bottom'"
+            )
             with map_ph:
                 st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=30), layers=[target_layer, base_layer, drone_layer]))
             
