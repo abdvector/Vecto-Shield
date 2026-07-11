@@ -78,9 +78,7 @@ with tab2:
     with col_chart2:
         chart_ph = st.empty()
         
-    st.info("**Real-Time Metaheuristic Analytics (PSO)**: The Particle Swarm Optimization algorithm mathematically updates velocity vectors in real-time, allowing the drone squadrons to independently search, optimize flight paths, and converge on high-risk mosquito breeding clusters with minimal fuel usage.")
-    st.latex(r"v_{i}^{t+1} = \omega v_{i}^t + c_1 r_1 (pbest_i - x_i^t) + c_2 r_2 (gbest - x_i^t)")
-    st.caption("Where **$v$** is velocity, **$\omega$** is inertia, **$pbest$** is the drone's best known position, and **$gbest$** is the target hotspot.")
+    st.info("**Real-Time Metaheuristic Analytics**: The Particle Swarm Optimization (PSO) metaheuristic mathematically updates velocity vectors in real-time, allowing the drones to independently search, optimize flight paths, and converge on high-risk clusters.")
         
     if start_btn:
         simulator = SwarmSimulator(targets, drone_base)
@@ -89,24 +87,13 @@ with tab2:
         target_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame(targets, columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[255, 0, 0, 200]', get_radius=300)
         base_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame([drone_base], columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 100, 255, 255]', get_radius=500)
         
-        icon_data = {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flight_Simulator_Airplane_icon.svg/512px-Flight_Simulator_Airplane_icon.svg.png",
-            "width": 512,
-            "height": 512,
-            "anchorY": 256
-        }
-        
         for i, frame in enumerate(frames):
-            drone_df = pd.DataFrame(frame, columns=['lon', 'lat'])
-            drone_df["icon_data"] = [icon_data for _ in range(len(drone_df))]
             drone_layer = pdk.Layer(
-                "IconLayer",
-                data=drone_df,
-                get_icon="icon_data",
-                get_size=4,
-                size_scale=10,
-                get_position="[lon, lat]",
-                get_color=[16, 185, 129, 255] # Bright Emerald Green (IconLayer expects a list, not string)
+                'ScatterplotLayer', 
+                data=pd.DataFrame(frame, columns=['lon', 'lat']), 
+                get_position='[lon, lat]', 
+                get_color='[16, 185, 129, 255]', # Bright Emerald Green
+                get_radius=250
             )
             with map_ph:
                 st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=30), layers=[target_layer, base_layer, drone_layer]))
