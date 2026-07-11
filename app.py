@@ -87,13 +87,24 @@ with tab2:
         target_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame(targets, columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[255, 0, 0, 200]', get_radius=300)
         base_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame([drone_base], columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 100, 255, 255]', get_radius=500)
         
+        icon_data = {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flight_Simulator_Airplane_icon.svg/512px-Flight_Simulator_Airplane_icon.svg.png",
+            "width": 512,
+            "height": 512,
+            "anchorY": 256
+        }
+        
         for i, frame in enumerate(frames):
+            drone_df = pd.DataFrame(frame, columns=['lon', 'lat'])
+            drone_df["icon_data"] = [icon_data for _ in range(len(drone_df))]
             drone_layer = pdk.Layer(
-                'ScatterplotLayer', 
-                data=pd.DataFrame(frame, columns=['lon', 'lat']), 
-                get_position='[lon, lat]', 
-                get_color='[16, 185, 129, 255]', # Bright Emerald Green
-                get_radius=250
+                "IconLayer",
+                data=drone_df,
+                get_icon="icon_data",
+                get_size=4,
+                size_scale=10,
+                get_position="[lon, lat]",
+                get_color=[16, 185, 129, 255] # Bright Emerald Green (IconLayer expects a list, not string)
             )
             with map_ph:
                 st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=30), layers=[target_layer, base_layer, drone_layer]))
@@ -103,7 +114,7 @@ with tab2:
             fig.update_layout(title="Average Distance to Target vs Time", xaxis_title="Simulation Steps (Time)", yaxis_title="Geographic Distance (Degrees)", paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'), margin=dict(l=0, r=0, t=30, b=0))
             with chart_ph:
                 st.plotly_chart(fig, use_container_width=True)
-            time.sleep(0.05)
+            time.sleep(0.08)
 
 with tab3:
     st.subheader("PREDICTION PERFORMANCE & ANALYTICS DASHBOARD")

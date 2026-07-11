@@ -14,7 +14,7 @@ class SwarmSimulator:
             r1, r2 = np.random.rand(NUM_DRONES, 2), np.random.rand(NUM_DRONES, 2)
             # Tuned for slower, smoother geographic convergence
             self.vel = (0.85 * self.vel) + (0.1 * r1 * (pbest - self.pos)) + (0.15 * r2 * (assigned_targets - self.pos))
-            self.pos += self.vel * 0.1
+            self.pos += self.vel * 0.08
             dist = np.linalg.norm(self.pos - assigned_targets, axis=1)
             improved = dist < pbest_val
             pbest[improved], pbest_val[improved] = self.pos[improved], dist[improved]
