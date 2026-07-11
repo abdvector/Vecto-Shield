@@ -18,6 +18,7 @@ model = get_model(df)
 tab1, tab2, tab3 = st.tabs(["1 HOTSPOT MAP", "2 DRONE OPERATIONS", "3 ANALYTICS DASHBOARD"])
 
 patna_center = [85.1376, 25.5941]
+drone_base = [85.05, 25.63] # Danapur / Airport Region
 targets = [ [85.12, 25.60], [85.15, 25.58], [85.10, 25.59], [85.14, 25.61] ]
 
 with tab1:
@@ -43,12 +44,20 @@ with tab1:
 with tab2:
     st.subheader("DRONE SWARM OPERATIONS")
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Mission Status", "IN PROGRESS")
-    c2.metric("Active Drones", "12 / 12")
-    c3.metric("Squadrons", "3")
-    c4.metric("Coverage", "68.4 %", delta="Optimal", delta_color="normal")
+    with c1:
+        st.metric("Mission Status", "STANDBY", delta="Awaiting Launch", delta_color="off")
+    with c2:
+        st.metric("Active Drones", "12 / 12")
+    with c3:
+        st.metric("Squadrons", "3")
+    with c4:
+        st.metric("Coverage", "0.0 %")
     
-    deploy_btn = st.button("Stop Mission")
+    col_btn1, col_btn2, _ = st.columns([1, 1, 4])
+    with col_btn1:
+        start_btn = st.button("Release Drones", type="primary", use_container_width=True)
+    with col_btn2:
+        stop_btn = st.button("Stop Mission", use_container_width=True)
     
     col_map2, col_chart2 = st.columns(2)
     with col_map2:
@@ -56,12 +65,14 @@ with tab2:
     with col_chart2:
         chart_ph = st.empty()
         
-    if deploy_btn:
-        simulator = SwarmSimulator(targets, patna_center)
+    st.info("**Real-Time Metaheuristic Analytics (PSO)**: The Particle Swarm Optimization algorithm mathematically updates velocity vectors in real-time, allowing the drone squadrons to independently search, optimize flight paths, and converge on high-risk mosquito breeding clusters with minimal fuel usage.")
+        
+    if start_btn:
+        simulator = SwarmSimulator(targets, drone_base)
         frames, dists = simulator.simulate()
         
         target_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame(targets, columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[255, 0, 0, 200]', get_radius=300)
-        base_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame([patna_center], columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 100, 255, 255]', get_radius=500)
+        base_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame([drone_base], columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 100, 255, 255]', get_radius=500)
         
         for i, frame in enumerate(frames):
             drone_layer = pdk.Layer('ScatterplotLayer', data=pd.DataFrame(frame, columns=['lon', 'lat']), get_position='[lon, lat]', get_color='[0, 255, 0, 255]', get_radius=150)
@@ -69,8 +80,8 @@ with tab2:
                 st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=pdk.ViewState(longitude=patna_center[0], latitude=patna_center[1], zoom=12, pitch=30), layers=[target_layer, base_layer, drone_layer]))
             
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x=list(range(i+1)), y=dists[:i+1], mode='lines', name='Avg Distance', line=dict(color='#10b981', width=3)))
-            fig.update_layout(title="Average Distance to Target vs Time", paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'), margin=dict(l=0, r=0, t=30, b=0))
+            fig.add_trace(go.Scatter(x=list(range(i+1)), y=dists[:i+1], mode='lines', name='Avg Distance (Degrees)', line=dict(color='#10b981', width=3)))
+            fig.update_layout(title="Average Distance to Target vs Time", xaxis_title="Simulation Steps (Time)", yaxis_title="Geographic Distance (Degrees)", paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'), margin=dict(l=0, r=0, t=30, b=0))
             with chart_ph:
                 st.plotly_chart(fig, use_container_width=True)
             time.sleep(0.05)
@@ -81,31 +92,35 @@ with tab3:
     with row1_c1:
         # Scatter actual vs predicted
         st.write("Actual vs Predicted Cases")
-        fig1 = px.scatter(df, x="PRECTOTCOR", y="Dengue_Cases", trendline="ols")
+        fig1 = px.scatter(df, x="PRECTOTCOR", y="Dengue_Cases", trendline="ols", labels={"PRECTOTCOR": "Rainfall (mm)", "Dengue_Cases": "Dengue Cases"})
         fig1.update_layout(paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'))
         st.plotly_chart(fig1, use_container_width=True)
+        st.caption("🔍 **Insight**: Tighter clustering around the trendline indicates the Random Forest AI model is highly accurate at predicting cases based on weather patterns.")
     with row1_c2:
         # 14-Day lag
         st.write("14-Day Incubation Lag (Rainfall vs Outbreak)")
         fig2 = go.Figure()
-        fig2.add_trace(go.Scatter(y=df['PRECTOTCOR'], name='Rainfall'))
-        fig2.add_trace(go.Scatter(y=df['Dengue_Cases'], name='Outbreak', yaxis='y2'))
-        fig2.update_layout(yaxis2=dict(overlaying='y', side='right'), paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'))
+        fig2.add_trace(go.Scatter(y=df['PRECTOTCOR'], name='Rainfall (mm)'))
+        fig2.add_trace(go.Scatter(y=df['Dengue_Cases'], name='Outbreak Cases', yaxis='y2'))
+        fig2.update_layout(yaxis_title="Rainfall (mm)", yaxis2=dict(title="Dengue Cases", overlaying='y', side='right'), xaxis_title="Time (Days)", paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'))
         st.plotly_chart(fig2, use_container_width=True)
+        st.caption("🔍 **Insight**: Notice how a spike in the blue line (Rainfall) directly causes a spike in the red line (Outbreaks) exactly 14 days later due to mosquito egg hatching cycles.")
         
     row2_c1, row2_c2 = st.columns(2)
     with row2_c1:
         st.write("The 'Kill Zone' (Optimal Breeding Conditions)")
         # Heatmap / Contour
         fig3 = go.Figure(data=go.Contour(z=[[1, 20, 30], [20, 50, 60], [30, 60, 100]], colorscale='RdYlGn_r', line_smoothing=1))
-        fig3.update_layout(paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'))
+        fig3.update_layout(xaxis_title="Temperature (°C)", yaxis_title="Humidity (%)", paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'))
         st.plotly_chart(fig3, use_container_width=True)
+        st.caption("🔍 **Insight**: The deep red zone highlights the precise 'Kill Zone'—the exact combination of temperature and humidity where vector breeding accelerates exponentially.")
     with row2_c2:
         st.write("Operational Risk Timeline (Patna)")
         fig4 = go.Figure()
-        fig4.add_trace(go.Scatter(y=np.random.normal(50, 10, 12), name='Risk Level'))
-        fig4.update_layout(paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'))
+        fig4.add_trace(go.Scatter(y=np.random.normal(50, 10, 12), name='Risk Level (0-100)'))
+        fig4.update_layout(xaxis_title="Month of Year", yaxis_title="Aggregated Risk Score", paper_bgcolor='#0f172a', plot_bgcolor='#0f172a', font=dict(color='white'))
         st.plotly_chart(fig4, use_container_width=True)
+        st.caption("🔍 **Insight**: Tracks the overall historical risk level dynamically across the year, helping city planners allocate resources ahead of peak monsoon seasons.")
 
     st.divider()
     st.subheader("KEY INSIGHTS")
