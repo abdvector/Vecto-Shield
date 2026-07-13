@@ -15,6 +15,19 @@ st.set_page_config(page_title="Vecto Shield", layout="wide", initial_sidebar_sta
 inject_custom_css()
 df = load_data(os.path.join("Data", "pune_weather.csv"), os.path.join("Data", "pune_health.csv"))
 model = get_model(df)
+
+col_title, col_author = st.columns([3, 1])
+with col_title:
+    st.title("🛡️ Vecto Shield")
+with col_author:
+    st.markdown("""
+    <div style="text-align: right; margin-top: 15px;">
+        <span style="font-size: 1.2em; font-weight: bold; color: #10b981;">Created by ABHISHEK</span><br>
+        <span style="font-size: 1em; color: #94a3b8;">BIT Mesra</span>
+    </div>
+    """, unsafe_allow_html=True)
+    
+st.divider()
 tab1, tab2, tab3 = st.tabs(["1 PREDICTED HOTSPOTS", "2 DRONE OPERATIONS", "3 ANALYTICS DASHBOARD"])
 
 patna_center = [85.1376, 25.5941]
