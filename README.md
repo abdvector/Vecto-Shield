@@ -1,6 +1,7 @@
 # Vecto Shield: Intelligent Autonomous Vector Control System
 
-![Vecto Shield Banner](https://img.shields.io/badge/Status-Active-brightgreen) ![Python](https://img.shields.io/badge/Python-3.9%2B-blue) ![Streamlit](https://img.shields.io/badge/UI-Streamlit-red) ![Machine Learning](https://img.shields.io/badge/AI-Random_Forest-orange)
+
+![Release](https://img.shields.io/badge/Release-v1.0.0-007ec6?style=flat) ![Streamlit](https://img.shields.io/badge/Streamlit-Ready-ff4b4b?style=flat) ![Python](https://img.shields.io/badge/Python-3.9%2B-007ec6?style=flat) ![License](https://img.shields.io/badge/License-MIT-97ca00?style=flat)
 
 **Vecto Shield** is a proactive "Predict & Prevent" enterprise-grade system designed to combat vector-borne diseases (like Dengue and Malaria) in urban environments. By bridging the gap between technological capability and social equity, this system transitions municipal operations from inefficient *Reactive Logistics* (chasing cases after an outbreak) to intelligent *Predictive Logistics*.
 
