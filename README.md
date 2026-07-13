@@ -1,9 +1,33 @@
 # Vecto Shield: Intelligent Autonomous Vector Control System
 
-
 ![Release](https://img.shields.io/badge/Release-v1.0.0-007ec6?style=flat) ![Streamlit](https://img.shields.io/badge/Streamlit-Ready-ff4b4b?style=flat) ![Python](https://img.shields.io/badge/Python-3.9%2B-007ec6?style=flat) ![License](https://img.shields.io/badge/License-MIT-97ca00?style=flat)
 
 **Vecto Shield** is a proactive "Predict & Prevent" enterprise-grade system designed to combat vector-borne diseases (like Dengue and Malaria) in urban environments. By bridging the gap between technological capability and social equity, this system transitions municipal operations from inefficient *Reactive Logistics* (chasing cases after an outbreak) to intelligent *Predictive Logistics*.
+
+---
+
+## Contents
+- [Dashboard Previews](#dashboard-previews)
+- [The Project](#the-project)
+- [Why It Matters](#why-it-matters)
+- [System Workflow](#system-workflow)
+- [How to Get Started](#how-to-get-started)
+- [Assumptions & Technical Constraints](#assumptions--technical-constraints)
+- [Key Findings](#key-findings)
+- [Scalability & Expansion](#scalability--expansion-)
+
+---
+
+## Dashboard Previews
+
+![Live Risk Heatmap](images/live_risk_heatmap.png)
+*Tab 1: Live Risk Heatmap displaying current operational status and top predicted hotspots based on AI analysis.*
+
+![Drone Operations](images/drone_operation.png)
+*Tab 2: Drone Operations simulating real-time Particle Swarm Optimization (PSO) routing to infection clusters.*
+
+![Prediction Analytics](images/prediction_analytics.png)
+*Tab 3: Comprehensive Analytics tracking the 'Kill Zone', historical model accuracy, and biological incubation lag.*
 
 ---
 
