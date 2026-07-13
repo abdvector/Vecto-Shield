@@ -18,7 +18,7 @@ model = get_model(df)
 
 col_title, col_author = st.columns([3, 1])
 with col_title:
-    st.title("🛡️ Vecto Shield")
+    st.title(" ⭕ VECTO SHIELD ")
 with col_author:
     st.markdown("""
     <div style="text-align: right; margin-top: 15px;">
