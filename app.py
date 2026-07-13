@@ -37,7 +37,7 @@ targets = [ [85.12, 25.60], [85.15, 25.58], [85.10, 25.59], [85.14, 25.61] ]
 with tab1:
     st.markdown("""
     ### Intelligent Autonomous Vector Control
-    Welcome to the Vecto Shield operations dashboard. This enterprise-grade AI system automatically ingests meteorological data and municipal health records to predict mosquito-borne outbreaks before they occur. 
+    Welcome to the Vecto Shield operations dashboard. This AI system automatically ingests meteorological data and municipal health records to predict mosquito-borne outbreaks before they occur. 
     
     *Note: The current Live Risk Heatmap and metrics are illustrating data scaled for **Patna City** as an example deployment. The backend is designed to instantly scale to any global municipality when fed with local datasets.*
     """)
